@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CS 70 Grutoring Queue Redirect</title>
+    <script>
+        // Yeah, it's hard-coded for now, deal with it. 
+        // The queue will be active for these hours.
+        // Note if 1 is listed as an active hour, the queue will close at 2. 
+        var schedule = {
+            // Saturday, 11-3
+            7: {
+                11: true,
+                12: true,
+                13: true,
+                14: true,
+            },
+            // Monday, 12-2 (for testing purposes)
+            1: {
+                // 12: true,
+                13: true,
+            },
+        }
+
+        // Redirects if we are within scheduled grutoring hours.
+        function checkSchedule() {
+            var date = new Date();
+            var day = date.getDay();
+            var hour = date.getHours();
+
+            console.log("Schedule checked. Today is " + day + " and the hour is " + hour + ".");
+            if (day in schedule && hour in schedule[day]) {
+                window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSd4uV3FICjYIDCnAeQYtDOWrL1dQOyuwmD76CXuO_gSjnv6wQ/viewform");
+            }
+        }
+
+        window.onload = checkSchedule;
+    </script>
+</head>
+<body>
+    <h1>
+        Looking for the CS 70 digital queue?
+    </h1>
+    <p>
+        Unfortunately, the grutors aren't scheduled to be in the labs right now. If there are any grutors in the labs, they're working overtime--be sure to thank them! (And maybe suggest that they take care of themselves and go home.)
+    </p>
+    <p>
+        The queue will be back soon! 
+    </p>
+    <p>
+        (If you're seeing this page and it's actually during grutoring hours, please email <a href="mailto:gserate@g.hmc.edu">gserate@g.hmc.edu</a> so it can be fixed in a timely manner.)
+    </p>
+</body>
+</html>
+
+
