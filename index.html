@@ -21,6 +21,8 @@
             },
         }
 
+        var numToDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
         // Redirects if we are within scheduled grutoring hours.
         function checkSchedule() {
             var date = new Date();
@@ -30,6 +32,21 @@
             console.log("Schedule checked. Today is " + day + " and the hour is " + hour + ".");
             if (day in schedule && hour in schedule[day]) {
                 window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSd4uV3FICjYIDCnAeQYtDOWrL1dQOyuwmD76CXuO_gSjnv6wQ/viewform");
+            }
+            populateSchedule(); // TODO: well heck, guess we'll do this. 
+        }
+
+        function populateSchedule() {
+            console.log("Attempting to populate schedule.");
+            var scheduleDiv = document.getElementById("schedule");
+            console.log(scheduleDiv);
+            for (day in schedule) {
+                var newDay = "<div>"+numToDay[day];
+                for (time in schedule[day]) {
+                    newDay += "<div>"+time+":00</div>";
+                }
+                newDay += "</div>";
+                scheduleDiv.appendChild(newDay); // TODO probably use jquery here
             }
         }
 
@@ -46,6 +63,7 @@
     <p>
         The queue will be back soon! 
     </p>
+    <div id="schedule" onload="populateSchedule();"></div>
     <p>
         (If you're seeing this page and it's actually during grutoring hours, please email <a href="mailto:gserate@g.hmc.edu">gserate@g.hmc.edu</a> so it can be fixed in a timely manner.)
     </p>
