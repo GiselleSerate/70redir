@@ -3,12 +3,11 @@
 <head>
     <title>CS 70 Grutoring Queue Redirect</title>
     <script>
-        // Yeah, it's hard-coded for now, deal with it. 
         // The queue will be active for these hours.
         // Note if 1 is listed as an active hour, the queue will close at 2. 
         var schedule = {
             // Saturday, 11-3
-            7: {
+            6: {
                 11: true,
                 12: true,
                 13: true,
@@ -37,21 +36,32 @@
         }
 
         function populateSchedule() {
-            console.log("Attempting to populate schedule.");
+            console.log("Populating schedule.");
             var scheduleDiv = document.getElementById("schedule");
             console.log(scheduleDiv);
             for (day in schedule) {
-                var newDay = "<div>"+numToDay[day];
+                var newDay = "<div>"
+                // Add header
+                newDay += "<div class=sched-header>"+numToDay[day]+"</div>";
                 for (time in schedule[day]) {
                     newDay += "<div>"+time+":00</div>";
                 }
                 newDay += "</div>";
-                scheduleDiv.appendChild(newDay); // TODO probably use jquery here
+                scheduleDiv.innerHTML += newDay;
             }
         }
 
         window.onload = checkSchedule;
     </script>
+    <style>
+        #schedule {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .sched-header {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>
