@@ -61,7 +61,7 @@
             populateSchedule(); // TODO: well heck, guess we'll do this. 
         }
 
-        // Convert time to AM/PM string.
+        // Convert military time to AM/PM string.
         function convertTime(time) {
             ampm = "AM";
             if(time > 12) {
@@ -71,13 +71,14 @@
             return time+":00 "+ampm;
         }
 
+        // Populate schedule div.
         function populateSchedule() {
             console.log("Populating schedule.");
             var scheduleDiv = document.getElementById("schedule");
             console.log(scheduleDiv);
             for (day in schedule) {
                 var newDay = "<div>"
-                // Add header
+                // Add header.
                 newDay += "<div class=sched-header>"+numToDay[day]+"</div>";
                 for (time in schedule[day]) {
                     newDay += "<div>"+convertTime(time)+"</div>";
