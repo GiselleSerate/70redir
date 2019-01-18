@@ -61,6 +61,16 @@
             populateSchedule(); // TODO: well heck, guess we'll do this. 
         }
 
+        // Convert time to AM/PM string.
+        function convertTime(time) {
+            ampm = "AM";
+            if(time > 12) {
+                time = time - 12;
+                ampm = "PM";
+            }
+            return time+":00 "+ampm;
+        }
+
         function populateSchedule() {
             console.log("Populating schedule.");
             var scheduleDiv = document.getElementById("schedule");
@@ -70,7 +80,7 @@
                 // Add header
                 newDay += "<div class=sched-header>"+numToDay[day]+"</div>";
                 for (time in schedule[day]) {
-                    newDay += "<div>"+time+":00</div>";
+                    newDay += "<div>"+convertTime(time)+"</div>";
                 }
                 newDay += "</div>";
                 scheduleDiv.innerHTML += newDay;
