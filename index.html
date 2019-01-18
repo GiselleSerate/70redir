@@ -6,17 +6,43 @@
         // The queue will be active for these hours.
         // Note if 1 is listed as an active hour, the queue will close at 2. 
         var schedule = {
-            // Saturday, 11-3
+            // Saturday, 11-3, 7-9
             6: {
                 11: true,
                 12: true,
                 13: true,
                 14: true,
+                19: true, // 7
+                20: true,
             },
-            // Monday, 12-2 (for testing purposes)
-            1: {
-                // 12: true,
+            // Sunday, 11-3, 7-9
+            0: {
+                11: true,
+                12: true,
                 13: true,
+                14: true,
+                19: true, // 7
+                20: true,
+            },
+            // Monday, 6-11
+            1: {
+                18: true,
+                19: true,
+                20: true,
+                21: true,
+            },
+            // Tuesday, 6-11
+            2: {
+                18: true,
+                19: true,
+                20: true,
+                21: true,
+            },
+            // Wednesday, 6-10
+            2: {
+                18: true,
+                19: true,
+                20: true,
             },
         }
 
