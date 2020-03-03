@@ -5,49 +5,64 @@
     <script>
         // The queue will be active for these hours.
         // Note if 1 is listed as an active hour, the queue will close at 2. 
+        // If status is 1, office hours; if status is 2, grutoring hours. 
         var schedule = {
+            // [PROFS] Friday, 2-3
             // Friday, nothing
             5: {
-                
+                14: 1,
             },
-            // Saturday, 1-3, 7-9
+            // Saturday, 1-5
             6: {
-                13: true,
-                14: true,
+                13: 2,
+                14: 2,
+                15: 2,
+                16: 2,
             },
-            // Sunday, 1-3, 6-10
+            // Sunday, 3-5, 8-10
             0: {
-                13: true,
-                14: true,
-                18: true, // 6
-                19: true,
-                20: true,
-                21: true,
+                15: 2,
+                16: 2,
+                20: 2, // 8
+                21: 2,
             },
+            // [PROFS] Monday, 10-12
             // Monday, 6-10
             1: {
-                18: true,
-                19: true,
-                20: true,
-                21: true,
+                10: 1,
+                12: 1,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
+            // [PROFS] Tuesday, 2:30-4:30
             // Tuesday, 6-10
             2: {
-                18: true,
-                19: true,
-                20: true,
-                21: true,
+                14: 1,
+                15: 1,
+                16: 1,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
+            // [PROFS] Wednesday, 4-6
             // Wednesday, 6-10
             3: {
-                18: true,
-                19: true,
-                20: true,
-                21: true,
+                16: 1,
+                17: 1,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
-            // Thursday, nothing
+            // Thursday, 6-10
             4: {
-
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             }
         }
 
@@ -61,6 +76,7 @@
 
             console.log("Schedule checked. Today is " + day + " and the hour is " + hour + ".");
             if (day in schedule && hour in schedule[day]) {
+                console.log("Redirecting.")
                 window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSd4uV3FICjYIDCnAeQYtDOWrL1dQOyuwmD76CXuO_gSjnv6wQ/viewform");
             }
             populateSchedule(); // TODO: well heck, guess we'll do this. 
@@ -86,7 +102,13 @@
                 // Add header.
                 newDay += "<div class=sched-header>"+numToDay[day]+"</div>";
                 for (time in schedule[day]) {
-                    newDay += "<div>"+convertTime(time)+"</div>";
+                    if (schedule[day][time] == 1) {
+                        attr = "prof"
+                    }
+                    else {
+                        attr = "grutor"
+                    }
+                    newDay += "<div class='" + attr + "'>"+convertTime(time)+"</div>";
                 }
                 newDay += "</div>";
                 scheduleDiv.innerHTML += newDay;
@@ -103,6 +125,12 @@
         .sched-header {
             font-weight: bold;
         }
+        .grutor {
+            background: yellow;
+        }
+        .prof {
+            background: orange;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +143,10 @@
     <p>
         The queue will be back soon! 
     </p>
-    <div id="schedule" onload="populateSchedule();"></div>
+    <p>
+        Here's the office hours schedule for profs (orange) and grutors (yellow):
+    </p>
+    <div id="schedule"></div>
     <p>
         (If you're seeing this page and it's actually during grutoring hours, please email <a href="mailto:gserate@g.hmc.edu">gserate@g.hmc.edu</a> so it can be fixed in a timely manner.)
     </p>
