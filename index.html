@@ -85,6 +85,7 @@
             var hour = date.getHours();
 
             console.log("Schedule checked. Today is " + day + " and the hour is " + hour + ".");
+            console.log(day in schedule && hour in schedule[day])
             if (day in schedule && hour in schedule[day]) {
                 console.log("Redirecting.")
                 window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSd4uV3FICjYIDCnAeQYtDOWrL1dQOyuwmD76CXuO_gSjnv6wQ/viewform");
