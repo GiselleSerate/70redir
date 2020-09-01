@@ -6,7 +6,7 @@
         // The queue will be active for these hours.
         // Note if 1 is listed as an active hour, the queue will close at 2. 
         // If status is 1, office hours; if status is 2, grutoring hours. 
-        var schedule = {
+        var schedule = {  // In PST
             // [PROFS] Friday, 2-3
             // Friday, nothing
             5: {
@@ -89,11 +89,16 @@
 
         // Redirects if we are within scheduled grutoring hours.
         function checkSchedule() {
-            var date = new Date();
-            var day = date.getDay();
-            var hour = date.getHours();
+            // Local Date + Time
+            var local = new Date();
+            
+            // Los Angeles Date + Time
+            var claremont = new Date(local.toLocaleString('en-US', { timeZone: "America/Los_Angeles" }))
+            
+            var day = claremont.getDay();
+            var hour = claremont.getHours();
 
-            console.log("Schedule checked. Today is " + day + " and the hour is " + hour + ".");
+            console.log("Schedule checked. Today is " + day + " and the hour is " + hour + " in Los Angeles.");
             if (day in schedule && hour in schedule[day]) {
                 console.log("Redirecting.")
                 window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSd4uV3FICjYIDCnAeQYtDOWrL1dQOyuwmD76CXuO_gSjnv6wQ/viewform");
@@ -112,9 +117,11 @@
         }
 
         // Populate schedule div.
+        // TODO: have schedule display in local timeZone
         function populateSchedule() {
             console.log("Populating schedule.");
             console.log(schedule);
+            
             var scheduleDiv = document.getElementById("schedule");
             for (day in schedule) {
                 var newDay = "<div>"
@@ -163,7 +170,7 @@
         The queue will be back soon! 
     </p>
     <p>
-        Here's the office hours schedule for profs (orange) and grutors (yellow):
+        Here's the office hours schedule for profs (orange) and grutors (yellow) - currently displayed in Pacific Time:
     </p>
     <div id="schedule"></div>
     <p>
