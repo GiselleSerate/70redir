@@ -6,7 +6,7 @@
         // The queue will be active for these hours.
         // Note if 1 is listed as an active hour, the queue will close at 2. 
         // If status is 1, office hours; if status is 2, grutoring hours. 
-        var schedule = {  // In PST
+        var schedule = {
             // [PROFS] Friday, 2-3
             // Friday, nothing
             5: {
@@ -15,77 +15,77 @@
 //                   18: 2,
 //                   19: 2,
             },
-            // Saturday, 10 AM - 6 PM, 8 PM - 12 AM
+            // Saturday, 10 AM - 12 AM
             6: {
-//                 10: 2,
-//                 11: 2,
-//                 12: 2,
-//                 13: 2,
-//                 14: 2,
-//                 15: 2,
-//                 16: 2,
-//                 17: 2,
-//                 20: 2,
-//                 21: 2,
-//                 22: 2,
-//                 23: 2,
+                10: 2,
+                11: 2,
+                12: 2,
+                13: 2,
+                14: 2,
+                15: 2,
+                16: 2,
+                17: 2,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
-            // Sunday, 10AM - 6PM, 8PM - 12AM
+            // Sunday, 10AM - 12AM
             0: {
-//                 10: 2,
-//                 11: 2,
-//                 12: 2,
-//                 13: 2,
-//                 14: 2,
-//                 15: 2,
-//                 16: 2,
-//                 17: 2,
-//                 20: 2,
-//                 21: 2,
-//                 22: 2,
-//                 23: 2,
+                10: 2,
+                11: 2,
+                12: 2,
+                13: 2,
+                14: 2,
+                15: 2,
+                16: 2,
+                17: 2,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
+                22: 2,
+                23: 2,
             },
-            // Monday, 11-1, 4-8
+            // Monday, 11 - 1, 4 - 10
             1: {
-//                 11: 2,
-//                 12: 2,
-//                 14: 1,
-//                 15: 1,
-//                 16: 2,
-//                 17: 2,
-//                 18: 2,
-//                 19: 2,
+                11: 2,
+                12: 2,
+                16: 2,
+                17: 2,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
-            // Tuesday, 11 - 1, 4 - 8
+            // Tuesday, 11 - 1, 4 - 10
             2: {
-//                 11: 2,
-//                 12: 2,
-//                 14: 1,
-//                 15: 1,
-//                 16: 2,
-//                 17: 2,
-//                 18: 2,
-//                 19: 2,
+                11: 2,
+                12: 2,
+                16: 2,
+                17: 2,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
-            // Wednesday, 11-1, 4-8
+            // Wednesday, 11 - 1, 4 - 10
             3: {
-//                 11: 2,
-//                 12: 2,
-//                 14: 1,
-//                 15: 1,
-//                 16: 2,
-//                 17: 2,
-//                 18: 2,
-//                 19: 2,
+                11: 2,
+                12: 2,
+                16: 2,
+                17: 2,
+                18: 2,
+                19: 2,
+                20: 2,
+                21: 2,
             },
             // Thursday, 4-8
             4: {
-//                 14: 1,
-//                 15: 1,
-//                 16: 2,
-//                 17: 2,
-//                 18: 2,
-//                 19: 2,
+                16: 2,
+                17: 2,
+                18: 2,
+                19: 2,
             }
         }
 
@@ -93,20 +93,15 @@
 
         // Redirects if we are within scheduled grutoring hours.
         function checkSchedule() {
-            // Local Date + Time
-            var local = new Date();
-            
-            // Los Angeles Date + Time
-            var claremont = new Date(local.toLocaleString('en-US', { timeZone: "America/Los_Angeles" }))
-            
-            var day = claremont.getDay();
-            var hour = claremont.getHours();
+            var date = new Date();
+            var day = date.getDay();
+            var hour = date.getHours();
 
-            console.log("Schedule checked. Today is " + day + " and the hour is " + hour + " in Los Angeles.");
+            console.log("Schedule checked. Today is " + day + " and the hour is " + hour + ".");
             if (day in schedule && hour in schedule[day]) {
                 console.log("Redirecting.")
                 window.location.assign("https://docs.google.com/forms/d/e/1FAIpQLSd4uV3FICjYIDCnAeQYtDOWrL1dQOyuwmD76CXuO_gSjnv6wQ/viewform");
-             }
+            }
             populateSchedule(); // TODO: well heck, guess we'll do this. 
         }
 
@@ -121,11 +116,9 @@
         }
 
         // Populate schedule div.
-        // TODO: have schedule display in local timeZone
         function populateSchedule() {
             console.log("Populating schedule.");
             console.log(schedule);
-            
             var scheduleDiv = document.getElementById("schedule");
             for (day in schedule) {
                 var newDay = "<div>"
@@ -168,13 +161,14 @@
         Looking for the CS 70 digital queue?
     </h1>
     <p>
-        Unfortunately, the grutors aren't scheduled to be online right now. If there are any grutors online, they're working overtime--be sure to thank them! (And maybe suggest that they take care of themselves and go home.)
+        Since there is not an assigment this week, grutoring will resume on Thursday, October 1. In the meantime, 
+        if you have quuestions about the proficiency checks, post on Piazza and if need be we can set up a time for one-on-one grutoring!
     </p>
     <p>
         The queue will be back soon! 
     </p>
     <p>
-        Here's the office hours schedule for profs (orange) and grutors (yellow) - currently displayed in Pacific Time:
+        Here's the office hours schedule for profs (orange) and grutors (yellow):
     </p>
     <div id="schedule"></div>
     <p>
@@ -182,5 +176,3 @@
     </p>
 </body>
 </html>
-
-
