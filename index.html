@@ -99,7 +99,9 @@
 
         // Redirects if we are within scheduled grutoring hours.
         function checkSchedule() {
-            var date = changeTimezone(new Date(), "Europe/London");
+            var date = new Date(date.toLocaleString('en-US', {
+                timeZone: 'Europe/London'
+            }));
             var day = date.getDay();
             var hour = date.getHours();
             console.log(day)
@@ -112,25 +114,6 @@
             }
             populateSchedule(); // TODO: well heck, guess we'll do this. 
         }
-        
-        
-        // Source: https://stackoverflow.com/questions/15141762/how-to-initialize-a-javascript-date-to-a-particular-time-zone
-        // Comments apply to case when ianatz = 'America/Toronto'
-        // Handles time zones for remote school
-        function changeTimezone(date, ianatz) {
-            // suppose the date is 12:00 UTC
-            var invdate = new Date(date.toLocaleString('en-US', {
-                timeZone: ianatz
-            }));
-
-            // then invdate will be 07:00 in Toronto
-            // and the diff is 5 hours
-            var diff = date.getTime() - invdate.getTime();
-
-            // so 12:00 in Toronto is 17:00 UTC
-            return new Date(date.getTime() - diff); // needs to substract
-        }
-        
 
         // Convert military time to AM/PM string.
         function convertTime(time) {
