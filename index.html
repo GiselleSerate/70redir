@@ -99,7 +99,8 @@
 
         // Redirects if we are within scheduled grutoring hours.
         function checkSchedule() {
-            var date = new Date(date.toLocaleString('en-US', {
+            var dateLocal = new Date()
+            var dateLA = new Date(dateLocal.toLocaleString('en-US', {
                 timeZone: 'Europe/London'
             }));
             var day = date.getDay();
